@@ -1,0 +1,38 @@
+# Dockerfile
+FROM node:alpine
+COPY . /app 
+WORKDIR /app
+CMD node app.js
+
+# docker version check
+docker version
+
+# build: 
+docker build -t docter-test .
+
+# see images:
+
+docker images
+docker image ls
+
+# docker run
+docker run docter-test  // Folder name [docter-test]
+
+# docker hub Online Repo Local to Dockerhub push
+
+docker login 
+docker tag 7f51a5914209 sajedul2022/docter-test
+docker images
+docker push sajedul2022/docter-test
+
+# pull Others computer / docker / pc / online play etc
+
+Like: https://labs.play-with-docker.com/
+
+docker version
+docker images
+docker pull sajedul2022/docter-test:latest
+docker images
+docker run sajedul2022/docter-test
+
+docker pull sajedul2022/docter-test:latest
