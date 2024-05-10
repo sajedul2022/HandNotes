@@ -1,0 +1,20 @@
+-------------- #7.1 Laravel Controller ------------
+
+1.	php artisan make:controller homeController
+
+2. // Create Migration
+	php artisan make:migration create_products_table
+
+3. // Run Migration
+	php artisan migrate
+
+4. // Create Product Model
+
+	php artisan make:model Product
+
+5.// Create Controller
+	php artisan make:controller ProductController --resource --model=Product
+
+6. 
+
+

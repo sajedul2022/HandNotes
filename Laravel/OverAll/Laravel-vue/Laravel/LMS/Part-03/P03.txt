@@ -1,0 +1,16 @@
+ ========== Class -03 ========
+
+1. set up liveeware https://laravel-livewire.com/docs/2.x/quickstart
+
+    composer require livewire/livewire
+    and include css and script see documentation
+
+2. flassher implements  https://php-flasher.io/laravel
+
+        use Flasher\Prime\FlasherInterface;
+
+        public function increase(FlasherInterface $flasher, $msg){
+
+                $flasher->addSuccess('Succesfully Increase!'. $msg);
+                //..
+        }

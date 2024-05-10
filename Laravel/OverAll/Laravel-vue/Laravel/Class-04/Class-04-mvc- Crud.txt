@@ -1,0 +1,237 @@
+	---- Class-04  MVC || Crud ----
+
+1. Create Model, migrate and controller: cli command 
+	php artisan make:model Post -mc
+
+
+2. create posts table in database. go to
+	migrations/2022_12_14_110004_create_posts_table.php
+
+// function up()
+ public function up()
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->dateTime('date');
+            $table->text('content');
+            $table->timestamps();
+        });
+    }
+
+ 
+// then cli for create post table
+	php artisan migrate 
+
+
+-------------- crud work --------------
+
+	##### Create ####
+
+1. web.php
+
+// use PostController;
+	use App\Http\Controllers\PostController;
+
+// crud: add a post
+Route::middleware('auth')->group(function () {
+
+    	Route::post('/add-post', [PostController::class, 		'add'])->name('add-post');
+
+
+});
+
+
+2. create add function in PostController
+
+use App\Models\Post;
+use Illuminate\Http\Request;
+
+
+public function add(Request $request){
+
+       
+
+        
+    }
+
+
+3. go to dashboard for setting view page
+
+<form action="{{route('add-post')}}" method="post">
+	@csrf
+
+	<p>
+	<input type="text" name="title" placeholder="Enter 			Title" >
+	</p>
+p>
+                            <textarea name="content" cols="30" rows="5" placeholder="Enter Text"></textarea>
+                        </p>
+                        <br/>
+                        <button type="submit" >Add Post</button>
+
+</form>
+
+see http://localhost:8000/dashboard
+
+// add @csrf for remove error page Expire.
+
+// for content save in browser
+ 	value="{{old('title')}}"
+
+
+4. add function work in PostController (2.)
+
+
+public function add(Request $request){
+
+        //validate
+
+        $request->validate([
+            'title'=> 'required',
+            'content'=> 'required'
+        ]);
+
+        // post moode class initiate
+
+        $post = new Post();
+        $post->title = $request->title;
+        $post->date = now();
+        $post->content = $request->content;
+
+        $post->save();
+
+        return "Post is Saved. ID is - ". $post->id;
+
+        
+    }
+
+
+// $request->all();  for test token etc
+
+			##### Read  ####
+
+1. dashboard
+
+	<!-- Show post -->
+
+                        <div class="flex-1">
+                            <h2>All post</h2>
+                                <ul>
+                                    <li>
+                                        <a href=""></a>
+                                    </li>
+                                </ul>
+                        </div>
+
+
+2. web.php 
+
+use App\Models\Post;
+
+
+
+Route::get('/dashboard', function () {
+
+    $posts = Post::all();
+    dd($posts);
+
+
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+// $posts = Post::all();
+
+// dd($posts); for test purpose
+// go to http://localhost:8000/dashboard
+
+3. and add parameter for showing
+	
+	$posts = Post::all();
+
+	return view('dashboard',[
+        'posts' => $posts;
+    ]);
+
+
+4. $posts variable availabe in dashboard.blade.php
+
+	@foreach($posts as $post)
+          <li>
+          	<a href="">{{$post->title}}</a>
+           </li>
+         @endforeach
+
+5. PostController.php  in add function to redirect this page and show/ read data
+
+ return redirect()->route('dashboard');
+
+
+6. create navigation go to viwes/layouts/navigation.blade.php
+
+
+<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+
+                    <x-nav-link :href="route('posts')" :active="request()->routeIs('posts')">
+                        {{ __('Post') }}
+                    </x-nav-link>
+   </div>
+
+// change route('posts')
+
+
+7. web.php  for routes
+
+     Route::get('/posts', [PostController::class, 'index'])->name('posts');
+
+
+8. go to make index() method
+
+// read data
+    public function index(){
+        return view('posts');
+    }
+
+9. go to or create:  posts.blade.php  file 
+
+ <div class="flex-1">
+                            <h2>All post</h2>
+                                <ul>
+                                    @foreach($posts as $post)
+                                    <li>   Post Title:
+                                        <a href="">{{$post->title}}</a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+            </div>
+
+
+
+
+
+
+
+10. web.php
+
+
+ // crud: add a post
+     Route::get(
+'/posts',  
+function () {
+        $posts = Post::all();
+        // dd($posts);
+        return view('posts',[
+            'posts' => $posts
+        ]);
+    }, 
+[PostController::class, 'index'])->name('posts');
+
+
+11. if new  field add or delete
+
+go to migrations/2022_12_14_110004_create_posts_table.php
+
+
+and cli command 
+	php artisan migrate:fresh --seed

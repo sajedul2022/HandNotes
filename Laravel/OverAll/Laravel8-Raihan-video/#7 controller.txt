@@ -1,0 +1,46 @@
+-------- #7 controller ---------
+
+1. cli command:
+
+	php artisan make:controller houseController
+
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class houseController extends Controller{
+
+     public function index( $name = null){
+        return "Hi, ". $name;
+    }
+}
+
+
+
+
+2. web.api
+
+use App\Http\Controllers\houseController;
+
+// controller Route
+
+Route::get('/house/{name?}', [houseController::class, 'index']);
+
+
+
+Go to: 
+
+http://localhost:8000/house
+
+
+
+
+
+
+
+
+
+

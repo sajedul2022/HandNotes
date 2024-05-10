@@ -1,0 +1,23 @@
+                ========== Class 01 ===========
+
+1. intall breeze and DB config
+2. https://spatie.be/docs/laravel-permission/v5/installation-laravel  //  User Permission set update
+3. https://php-flasher.io/laravel                                      // Laravel Flasher setup
+4. make model with -mc
+    php artisan make:model Lead -mc
+    php artisan make:model Course -mc
+    php artisan make:model Curriculum -mc
+    php artisan make:model Exam -mc
+    php artisan make:model Invoice -mc
+    php artisan make:model InvoiceItem -mc
+    php artisan make:model Attendance -mc
+    php artisan make:model Homework -mc
+    php artisan make:model Note -mc
+
+5. Database design and migration
+    https://app.dbdesigner.net/designer/schema/0-untitled-4b657596-1965-4812-bf18-17bfc38f6388
+
+
+    ** create each table schema table and field
+    ** relation table with others table: curricula table AND  courses table
+        $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');

@@ -1,0 +1,5 @@
+1. .env 
+2. Blade Templates https://laravel.com/docs/9.x/blade
+3.Starter Kits https://laravel.com/docs/9.x/starter-kits
+4. Tailwind css & alpinejs
+5. CLI command in Laravel

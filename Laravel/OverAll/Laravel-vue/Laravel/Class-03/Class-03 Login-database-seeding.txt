@@ -1,0 +1,84 @@
+---- Class- 03 Login-database-seeding ----
+
+** Login Setup:
+https://laravel.com/docs/9.x/starter-kits
+
+	composer require laravel/breeze --dev
+
+	php artisan breeze:install
+ 
+	php artisan migrate
+	npm install
+	npm run dev
+
+** seeding database
+
+goto-> DatabaseSeeder.php // seeding database new store or entry
+
+	use App\Models\User;
+
+        $user = new User();
+        $user->name = 'sajid';
+        $user->email = 'sajid@gmail.com';
+        $user->password = bcrypt('password');
+
+        $user->save();
+
+// for run cmd
+
+	php artisan migrate:fresh --seed
+
+
+** For layout create: <x-app-layout> (with login) and <x-guest-layout> (without Login) **
+
+
+	##########  <x-guest-layout> (without Login) ##########
+
+1. go to web.php // guest-layout route
+
+	Route::get('/about', function () {
+   	 return view('about');
+	});
+
+
+2. create views page about.blade.php
+
+<x-guest-layout>
+    <h2>About page: Guest for Testing</h2>
+</x-guest-layout>
+
+
+3. see browser
+http://localhost:8000/about
+
+
+	##########  <x-app-layout> (without Login) #############
+
+
+1. go to web.php // app-layout route
+
+	Route::get('/posts', function () {
+   	 return view('posts');
+	});
+
+//for create middleware authenticate   ->middleware('auth');
+
+Route::get('/posts', function () {
+    return view('posts');
+})->middleware('auth');
+
+
+
+2.create viewspage  posts.blade.php
+
+<x-app-layout> 
+    <h2>Posts page: With Login </h2>
+</x-app-layout>
+
+
+3. see browser
+http://localhost:8000/posts
+
+
+----------------------------------------
+

@@ -1,0 +1,209 @@
+	---- Class-05 Crud || Notification Pakage ----
+
+	##### Notification Pakage ######
+1. flasher install
+	composer  https://blog.shikhun.net/crud-operation
+
+2. use any or postController.php
+
+	use Flasher\Prime\FlasherInterface;
+
+ public function add(Request $request, FlasherInterface  $flasher){
+
+	// code go here..... 
+// flasher
+        $flasher->addSuccess('Post created Successfully');
+
+}
+
+3. error handling in form go to dashboard.blade.php
+
+{{var_dump($errors)}}
+
+//  blading php 
+@error('title')
+   <span class="text-red-500 text-sm" >
+           {{$message}}
+  </span>
+@enderror
+
+// use element in class
+
+<input 
+class="w-full px-4 py-2 border 
+@error('title') border-red-200 
+@else border-gray-200 @enderror"  
+
+type="text" name="title" placeholder="Enter Title" value="{{old('title')}}">
+
+		##### Crud: Edit/update, Delete ######
+
+            Edit::
+
+1. edit  go to posts.blade.php  edit anchor set
+
+<ul>
+                    @foreach($posts as $post)
+                    <li class="flex items-center" >
+                         Title: <a href="">{{$post->title}}</a>
+                        <span>
+                            <a href="" class="ml-6 text-white text-xs bg-green-500 rounded px-4">
+                                Edit
+                            </a>
+                        </span>
+                    </li>
+                    @endforeach
+                </ul>
+
+And anchor
+
+<a href="{{route('edit-post', $post->id)}}" class="ml-6 inline-block text-white text-xs bg-green-500 rounded px-4">
+ Edit </a>
+
+
+2. web.php
+
+     Route::get('/edit-post/{id}', [PostController::class, 'edit'])->name('edit-post');
+
+3. set up posts.blade.php anchor link href
+
+href="{{route('edit-post', $post->id)}}" 
+
+4. create function 
+
+
+    public function edit($id, FlasherInterface $flasher){
+
+        $post = Post::find($id );
+        
+        //alternative solution for warning to user
+        
+        if(empty($post)){
+        
+        $flasher->addError('Post not found');
+        
+        return redirect()->route('posts');
+        
+        }
+        
+        return view('edit-post',[
+        
+        'post' =>$post,
+        
+        ]);
+    
+}
+}
+
+
+5. create edit-post.blade.php Pakage
+
+<x-app-layout>
+
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Edit Post </h2>
+    </x-slot>
+    <div class="container nx--auto ">
+        <div class="bg-white p-6 my-6">
+            <form action="" method="post">
+                @csrf
+                <p class="mb-4">
+                    <input type="text" name="title" value="{{$post->title}}" >
+                </p>
+
+                <div class="mb-4">
+                    <textarea name="content"  cols="30" rows="5">{{$post->content}}</textarea>
+                </div>
+                <button class="bg-dark" type="submit" >Update</button>
+            </form>
+        </div>
+    </div>
+</x-app-layout>
+
+
+            Update::
+
+1. web.php
+
+Route::post('/update-post/{id}', [PostController::class, 'update'])->name('update-post'); 
+
+2. crate function
+// Update
+
+    public function update($id,Request $request, FlasherInterface $flasher){
+
+        $post = Post::findOrFail($id);
+        
+        //form validation
+        
+        $request->validate([
+        
+        'title' =>'required',
+        
+        'content' => 'required',
+        
+        ]);
+        
+        $post->title = $request->title;
+        
+        $post->content = $request->content;
+        
+        $post->save();
+        
+        $flasher->addSuccess('Post Updated Successfully');
+        
+        return redirect()->route('dashboard');
+        
+        } 
+
+3. setupdate  route in edit-post form
+ <form action="{{route('update-post', $post->id)}}" method="post"> 
+
+
+
+
+
+
+
+
+            Delete::
+
+1. web.php
+
+Route::post('/delete-post/{id}', [PostController::class, 'delete'])->name('delete-post'); 
+
+
+2. posts.blade.php  add delete button
+
+<form method="POST" action="{{ route('delete-post',$post->id)}}">
+
+                                    @csrf
+
+                                    <button type="submit" >
+                                       
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg>
+                                    </button>
+</form>
+
+
+ 3. create function
+
+ public function delete($id,Request $request, FlasherInterface $flasher){
+
+$post = Post::findOrFail($id);
+
+$post->delete();
+
+$flasher->addSuccess('Post delete Successfully');
+
+return redirect()->route('dashboard');
+
+} 
+
+
+                            
+
+and more deails
+https://blog.shikhun.net/crud-operation

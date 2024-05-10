@@ -1,0 +1,10 @@
+
+1. dd($posts);
+
+2.  {{var_dump($errors)}}
+
+3.  // test view
+        return response()->json($course);
+
+4. @csrf // for Cross-site request forgery set up. Page Expire
+

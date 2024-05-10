@@ -1,0 +1,16 @@
+
+        ### user Create
+
+        // $user = new User();
+        // $user->name = 'Super Admin';
+        // $user->email = 'super-admin@lms.com';
+        // $user->password = bcrypt('super@admin.com');
+        // $user->save();
+
+OR
+
+        $user = User::create([
+            'name' => 'Super Admin',
+            'email' => 'super-admin@lms.com',
+            'password' => bcrypt('password'),
+        ]);

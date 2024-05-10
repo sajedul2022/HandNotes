@@ -1,0 +1,49 @@
+--- File map ---
+
+1. Controller
+App>http>controller
+
+2. View
+resource>views
+
+3. Model
+app>model
+
+4. Route
+Directory
+
+
+
+
+----- CLI Command ----
+0.0  composer create-project laravel/laravel:^8 laravel_Auth
+
+0. Install Laravel globally
+
+	composer global require laravel/installer
+ 
+	laravel new example-app
+	
+1. run 
+	php artisan serve
+
+2. make middleare
+	php artisan make:middleware CheckAge
+
+3. make controller
+	php artisan make:controller showAge
+
+4. invokable Controller
+	php artisan make:controller testController --invokable
+
+5. Laravel authintication middlware 
+
+	composer require laravel/ui
+	php artisan ui bootstrap
+	php artisan ui bootstrap --auth
+	npm install
+	npm run dev
+
+6. any file missing
+	composer install
+	composer update

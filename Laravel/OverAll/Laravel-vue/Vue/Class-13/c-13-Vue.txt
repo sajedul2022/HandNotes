@@ -1,0 +1,46 @@
+------------------  Class-13  ------------------
+1.  npm init vue@latest
+    npm install
+    npm run dev
+
+2.VUE PROJECT  TAILWIND CSS INSTALL 
+    npm install -D tailwindcss postcss autoprefixer
+    npx tailwindcss init -p
+
+3.configuration    tailwind.css.config file
+
+    content: [
+
+        "./index.html",
+
+        "./src/**/*.{js,ts,jsx,tsx}",
+    ],
+
+4. Any Custom content in Element or Tag
+    vue-project\src\App.vue
+
+        
+<template>
+  
+  <h1 class="font-bold text-red-500"> {{ msg }}</h1>
+
+</template>
+
+
+<script>
+
+  export default{
+    name: 'App',
+    data(){
+      return {
+        msg: "Welcome TO VUE Project"
+      }
+    }
+  }
+  
+</script>
+
+
+
+And more
+https://blog.shikhun.net/install-process-tailwind-css-install-and-configure-vue-project-tailwind-css-install-project-file

@@ -1,0 +1,159 @@
+
+
+** mail config:
+
+https://www.itsolutionstuff.com/post/laravel-9-mail-laravel-9-send-email-tutorialexample.html
+
+and 
+
+https://www.itsolutionstuff.com/post/laravel-contact-form-send-email-tutorial-example.html
+
+1.  .env
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=sajedul.idb.info@gmail.com
+MAIL_PASSWORD=ktlbyneutalwiqbc
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS=sajedul.idb.info@gmail.com
+MAIL_FROM_NAME="${APP_NAME}"
+
+2. config\mail.php
+
+'smtp' => [
+            'transport' => 'smtp',
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+            'port' => env('MAIL_PORT', 465),
+            'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+            'username' => env('MAIL_USERNAME'),
+            'password' => env('MAIL_PASSWORD'),
+            'timeout' => null,
+            'auth_mode' => null,
+        ],
+
+
+3. MAIL_PASSWORD create password gmail > security > apppasswords
+
+https://myaccount.google.com/security
+
+https://myaccount.google.com/apppasswords
+
+                    ============== form part ============
+
+1. app\Mail\DemoMail.php
+
+     use Queueable, SerializesModels;
+
+    public $mailData;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($mailData){
+
+        $this->mailData = $mailData;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+       return $this->subject('Mail from sajedulTech.com')
+                    ->view('emails.contact-view');
+    }
+
+
+2. web.php
+
+    Route::get('contact', [MailController::class, 'contactForm']);
+    Route::post('contact', [MailController::class, 'messageSend'])->name('sendMessage');
+
+
+3. app\Http\Controllers\MailController.php
+
+   public function index()
+    {
+        $mailData = [
+            'title' => 'Mail from sajedulTech.com',
+            'body' => 'This is for testing email using smtp.'
+        ];
+
+        Mail::to('sajedul2016@gmail.com')->send(new DemoMail($mailData));
+
+        //dd("Email is sent successfully.");
+
+
+    }
+
+    public function contactForm(){
+        return view('emails.contact');
+    }
+
+    public function messageSend(Request $request){
+        // $datas = $request->all();
+        // dd($datas);
+
+        $sender_name = $request->sender_name;
+        $sender_email = $request->sender_email;
+
+        $mailData = [
+            'sender_name' => $request->sender_name,
+            'sender_email' => $request->sender_email,
+            'sender_message' => $request->sender_message
+        ];
+
+        Mail::to('sajedul.idb.info@gmail.com')->send(new DemoMail($mailData));
+
+        //dd('Email is sent Succssfully');
+
+	return back()->with('msg', 'We have received your message.');
+
+
+
+
+4. create  form    resources\views\emails\contact.blade.php
+
+	{{-- Message --}}
+
+                <div class="card">
+                    {{-- Message --}}
+
+                    @if ($msg = Session::get('msg'))
+                        <div class="alert alert-success">
+                            {{ $msg }}
+                        </div>
+                    @endif
+
+
+    <form action="{{ route('sendMessage') }}" method="post">
+        @csrf
+        <label for="">Name</label>
+        <input type="text" name="sender_name" placeholder="Enter Name"> <br>
+
+        <label for="">Email</label>
+        <input type="email" name="sender_email" placeholder="Enter Email"><br>
+
+        <label for="">Message</label>
+        <textarea name="sender_message" id="" cols="30" rows="10"></textarea> <br><br>
+
+        <input type="submit" name="submit" value="SEND">
+    </form>
+
+
+5. resources\views\emails\contact-view.blade.php   for mail template view mail
+
+    <h2>Hey, It's me {{ $mailData['sender_name'] }}</h2>
+    <br>
+
+    <strong>User details: </strong><br>
+    <strong>Name: </strong>{{ $mailData['sender_name'] }} <br>
+    <strong>Email: </strong>{{ $mailData['sender_email'] }} <br>
+    <strong>Message: </strong>{{ $mailData['sender_message'] }} <br><br>
+
+    Thank you

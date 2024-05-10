@@ -1,0 +1,122 @@
+========= Database seed =============
+
+
+1. php artisan make:model Product -mcr
+
+2. go to database\migrations\2023_01_10_094913_create_products_table.php
+
+     public function up()
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string("product_name", 150);
+            $table->string("product_details", 300);
+            $table->double("product_price", 6,2);
+            $table->string("product_image");
+            $table->tinyInteger("product_category");
+            $table->timestamps();
+        });
+    }
+
+  cli:   php artisan migrate
+
+
+3. php artisan make:factory productFactory
+
+**go to : database\factories\productFactory.php
+
+
+        namespace Database\Factories;
+        use App\Models\Product;
+
+
+        use Illuminate\Database\Eloquent\Factories\Factory;
+
+        class productFactory extends Factory
+        {
+            /**
+            * Define the model's default state.
+            *
+            * @return array
+            */
+            public function definition()
+            {
+
+                return [
+                    'product_name' => $this->faker->name(),
+                    'product_details' => $this->faker->text(),
+                    'product_price' => $this->faker->randomDigit(),
+                    'product_image' => $this->faker->imageUrl(640,480),
+                    'product_category' => $this->faker->randomDigit(),
+
+                ];
+            }
+        }
+
+4. database\seeders\DatabaseSeeder.php
+
+        // Product::factory(100)->create();
+        \App\Models\Product::factory(100)->create();;
+
+5.  php artisan db:seed
+    OR
+    php artisan migrate:fresh --seed
+
+
+
+                OR Manually seed
+
+
+**. php artisan make:seeder ProductSeeder
+
+    public function run(){
+
+        for($i=0; $i<= 100; $i++) {
+
+                DB::table('products')->insert([
+                    'product_name' => Str::random(15),
+                    'product_details' => Str::random(30),
+                    'product_price' => '200.00',
+                    'product_image' => 'assets/images/no_photo.jpg',
+                    'product_category' => '1',
+
+                ]);
+        }
+
+    }
+
+
+**. database\seeders\DatabaseSeeder.php
+
+    public function run()
+    {
+        // User::factory(10)->create();
+        // Product::factory(10)->create();
+
+        $this->call([
+            ProductSeeder::class
+        ]);
+    }
+
+    php artisan db:seed
+
+
+
+OR
+
+1. php artisan make:factory LeadFactory --model=Lead
+
+1.1 table migration scheme create
+
+
+2. database\factories\LeadFactory.php
+
+    return [
+            'name' => $this->faker->name,
+            'email' => $this->faker->email,
+            'phone' => $this->faker->phoneNumber
+        ];
+3. Seeder
+        Lead::factory(100)->create();
+
+4. php artisan migrate:fresh --seed

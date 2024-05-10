@@ -1,0 +1,86 @@
+## Create "Review" model, migratrion, controller, factory  ##
+
+                                    "Review" table:
+
+
+1. php artisan make:model Review -mc
+
+2. migrations\2022_12_25_191103_create_reviews_table.php    scheme design
+
+     public function up(){
+        Schema::create('reviews', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('review_by');
+            $table->text('comment');
+            $table->unsignedBigInteger('star')->default(5);
+            $table->unsignedBigInteger('course_id');
+            $table->timestamps();
+
+            $table->foreign('review_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+
+
+        });
+    }
+
+3. create factory
+    php artisan make:factory ReviewFactory
+
+
+    ** go file
+
+    use App\Models\User;
+    use App\Models\Course;
+
+    public function definition(){
+        return [
+            'review_by'=> User::all()->random()->id,
+            'comment'=> $this->faker->paragraph(),
+            'star'=> $this->faker->numberBetween(1,5),
+            'star'=> $this->faker->numberBetween(1,5),
+            'course_id'=> Course::all()->random()->id
+
+        ];
+    }
+
+
+4.  database\seeders\DatabaseSeeder.php
+
+        // review table
+            Review::factory(100)->create();
+
+
+         then cli:
+     php artisan migrate:fresh --seed
+
+
+
+
+5. go to app\Http\Controllers\CourseController.php
+
+  public function show($slug){
+
+        $course = Course::where('slug', $slug)->with('platform', 'topics', 'series', 'authors', 'reviews')->first();
+
+        // test view
+        // return response()->json($course);
+
+        // wrong page
+        if(empty($course)){
+            return abort(404);
+        }
+
+        return view('course.single',[
+            'course'=> $course,
+        ]);
+
+    }
+
+5. go to    app\Models\Course.php  for "hasMany" relation with "courses" table with "reviews" with "users" table
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
+
+
+

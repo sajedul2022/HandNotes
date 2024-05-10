@@ -1,0 +1,138 @@
+                -------  15.01 Quran app using Vue  -----------
+
+0. https://classic.yarnpkg.com/en/docs/install#windows-stable
+1. npm install --global yarn
+2.yarn --version
+3. yarn create vue
+4.yarn install
+5.yarn dev
+
+6. tailwind css add
+    yarn add tailwindcss postcss autoprefixer
+    npx tailwindcss init -p
+
+7.tailwind.config.js
+
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+  ],
+
+8. Add the @tailwind directives for each of Tailwind’s layers to your ./src/style.css file.
+
+style.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+9. src\main.js
+    import './style.css'
+
+** delete all css file, base.css and main.css
+    yarn dev
+
+10. Design Template in App.vue
+
+11. yarn add axios
+
+                    12. script set axios
+
+<script>
+        import axios from 'axios'
+
+        export default{
+            name: 'App',
+            data(){
+            return{
+                suras: []
+            }
+            },
+            mounted(){
+            axios.get("https://api.alquran.cloud/v1/surah")
+            .then(response => {
+                this.suras = response.data.data
+            })
+            }
+        }
+</script>
+
+<option value="" v-for="sura in suras" >{{ sura.name }} - {{ sura.englishName 
+ }}</option>
+
+                13. dynamic select list :value="sura.number"
+
+ <select @change="getSpecificSura" class="quran-input" name="" id=""> 
+     <option :value="sura.number" v-for="sura in suras">
+                {{ sura.name }} - {{ sura.englishName }}
+    </option>
+
+<script>
+    import axios from "axios";
+
+    export default {
+      name: "App",
+      data() {
+        return {
+          suras: [],
+          currentSura: [],
+        };
+      },
+      mounted() {
+        axios.get("https://api.alquran.cloud/v1/surah").then((response) => {
+          this.suras = response.data.data;
+        });
+
+        this.querySpecificSurah(1);
+      },
+
+      methods: {
+        getSpecificSura(e) {
+          this.querySpecificSurah(e.target.value);
+        },
+
+        querySpecificSurah(surahNumber) {
+          axios
+            .get("https://api.alquran.cloud/v1/surah/" + surahNumber)
+            .then((response) => {
+              this.currentSura = response.data.data;
+            });
+        },
+      },
+    };
+</script>
+
+
+                    14. loading .............
+
+** set div for loading in Template  
+     <svg> Loading ... 
+
+** data(){
+    //..
+    loading : true
+}
+querySpecificSurah(){
+
+     this.loading = true;
+      axios
+        .get("https://api.alquran.cloud/v1/surah/" + surahNumber)
+        .then((response) => {
+          this.currentSura = response.data.data;
+
+          this.loading = false;
+
+        });
+}
+
+** <div v-if="loading" class="flex">
+             Loading... icon
+    </div>
+
+     <div v-else class="text-2xl">
+     //..
+
+            ...... 15. currentSura dynamic  -------------
+
+<h3 class="font-bold mb-1 text-lg">{{currentSura.name}} - {{ currentSura.englishName }}</h3>
+<p>{{currentSura.englishNameTranslation}} | Ayahs: {{ currentSura.numberOfAyahs }} |  </p>

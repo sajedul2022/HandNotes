@@ -1,0 +1,47 @@
+====================================================================== others single, category query with id  from MySQl =====================================
+
+
+api.php: 
+Route::get('/design-item/{id}', [ProjectController::class, 'design_item']);
+Route::get('/cat_project/{id}', [ProjectController::class, 'cat_project']);
+Route::get('/single_project/{id}', [ProjectController::class, 'single_project']);
+
+
+
+Controller: 
+
+public function design_item($id)
+    {
+        $designTitle = Project::where('cat_id', '=', $id)
+            //    ->join('projects', 'categories.id', '=', 'projects.cat_id')
+            // ->select('categories.id', 'categories.name', 'projects.id', 'projects.cat_id', 'projects.name', 'projects.image_01')
+            ->get();
+        return response()->json($designTitle);
+    }
+
+
+
+    public function cat_project($id)
+    {
+        // dd('ok');
+
+        $cat_project = DB::table('projects')
+            ->select( 'id','name', 'cat_id', 'image_01')
+            ->where('cat_id',$id)
+            ->get();
+
+        return response()->json($cat_project);
+    }
+
+
+
+
+
+    public function single_project($id)
+    {
+
+        $single_project = Project::where('id', '=', $id)
+            ->get();
+
+        return response()->json($single_project);
+    }

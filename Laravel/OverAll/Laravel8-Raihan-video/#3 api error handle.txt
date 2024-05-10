@@ -1,0 +1,18 @@
+-------------- #3 api error handle ------------
+
+1. Making Routes: routes/api.php OR web.php
+
+// For api.php: 
+https://restless-sunset-221816.postman.co/workspace/My-Workspace~00b56b90-02f9-45aa-8782-de73e5bf48a2/request/create?requestId=4c85abde-a2ae-4d4b-9703-72644714b018
+
+http://localhost:8000/api/users/sajid
+
+
+	Route::get('/users/{name?}', function($name=null){
+    		return( "Hello $name!");
+	}); 
+
+// use ? for optional
+
+
+

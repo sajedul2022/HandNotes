@@ -1,0 +1,14 @@
+-------------- #2 Routing in api ------------
+
+Available Router Methods
+
+1.	Route::get($uri, $callback);
+2.	Route::post($uri, $callback);
+3.	Route::put($uri, $callback);
+4.	Route::patch($uri, $callback);
+5.	Route::delete($uri, $callback);
+6.	Route::options($uri, $callback);
+7.	Route::match(['http_method_1','http_method_n'], $uri, 			$callback);
+8.	Route::any($uri, $callback);
+9.Route::redirect('/here', '/there');
+10.Route::resource('products', ProductController::class);

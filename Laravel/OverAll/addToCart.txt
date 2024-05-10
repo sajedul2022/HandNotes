@@ -1,0 +1,106 @@
+** vue latest in laravel
+
+npm install vue
+npm install vue-loader --save-dev
+npm install vue-template-loader --save-dev
+npm run dev
+
+=== laravel data show ==
+
+1. php artisan make:controller FrontendController
+2. npm i axios
+
+
+
+custom port
+php artisan serve --port 8001
+
+
+========== Add to cart ==============
+
+1. resources\js\components\AddToCart.vue
+
+<template>
+
+        <button class="btn btn-danger btn-block text-center"
+            @click="addProductToCart(); itemCount++ ">
+            <!-- v-on:click.prevent="addProductToCart(), "> -->
+            Add To Cart
+        </button>
+
+</template>
+
+<script>
+    export default {
+        data(){
+            return {
+
+            }
+        },
+        props:['productId'],
+
+        methods:{
+            async addProductToCart(){
+
+                // Checking if user logged in.
+
+            //    if(this.userId == 0){
+            //         alert('You Need to login, To add this product in Cart');
+            //         return;
+            //     }
+
+                // If user logged in then add item to cart.
+
+                let response = await axios.post('/cart', {
+                    pid: this.productId
+                }).then(function(res){console.log(res.data)});
+
+                // alert(this.productId);
+
+                // this.$root.$emit('changeInCart', response.data.items)
+
+            }
+        },
+
+
+    }
+</script>
+
+
+2.  resources\js\app.js
+
+    import { createApp } from 'vue';
+// import ExampleComponent from './components/ExampleComponent.vue';
+import AddToCart from './components/AddToCart.vue';
+import Cart from './components/Cart.vue';
+
+const app = createApp({});
+// app.component('example-component', ExampleComponent);
+app.component('addto-cart', AddToCart, );
+app.component('cart', Cart );
+app.mount("#app");
+
+3. resources\views\front_page.blade.php
+
+    <addto-cart product-id={{$product->id}} > </addto-cart>
+
+
+4. app\Http\Controllers\CartController.php
+
+     public function store(Request $request)
+    {
+        $id =  $request->pid;
+        $product = Product::find($id);
+        $data['product_id'] = $product->id;
+        $data['quantity'] = 1;
+        $data['price'] = $product->price;
+        $data['user_id'] = Auth()->user()->id;
+        Cart::insert($data);
+
+        return $data;
+
+    }
+
+5. app\Models\Cart.php
+
+    protected $fillable = ['product_id', 'quantity', 'price', 'user_id'];
