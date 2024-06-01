@@ -41,6 +41,14 @@ git switch feature/fix-text
 git switch master
 git merge feature/add-heading-text
 
+Steps Merge: 
+pull Request and compare -> compare then create pull request -> merge and confirm merge
+
+Contributor: git switch branchname
+            git add .
+            .....
+            git push -u origin branchname
+
 // conflict
 show both branch code and edit 
 git add .
