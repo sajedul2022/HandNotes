@@ -1,0 +1,15 @@
+// controller/command ==> service class ==> model / DBAL ==> database
+
+ 
+
+// controller/command ==> service class ==> repository ==> model / DBAL ==> database
+
+        
+
+// controller/command ==> action class ==> ??
+
+dto- Data Transfer object
+
+
+
+
