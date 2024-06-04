@@ -1,0 +1,62 @@
+Step - 1
+
+1. Login Your Cpanel
+2. Make SSH Key ( id_esdsa ) by terminal: Like
+ssh-keygen -t ecdsa -b 521
+3. autorized the key
+
+Step - 2
+
+1. Copy SSH Key
+2. Set this key on your github project 
+3. check connection between gthub project to server ssh key
+
+Step - 3
+
+1. Open Git version control
+2. Make a reposotory using your github project ssh link
+3. Select write folder and must  empty this folder before make it.
+
+Step - 4
+
+1. Make a .cpanel.yml add some  code with cpanel username
+
+last 2 step for laravel project
+2. Make .env file for laravel project and i give existing database connection
+3. Open Terminal and composer install and migrate database
+
+
+
+======================= command ===========
+
+ssh-keygen -t ecdsa -b 521
+
+cd .ssh
+
+cat id_ecdsa.pub
+
+ssh -T git@github.com
+
+git remote -v
+
+git remote set-url origin git@github.com:sajedul202200/lounge-kit.git
+
+==== push cpanel ===
+
+git remote add hrlounge ssh://aaeesm5@aaeesm.com/home/aaeesm5/demo.myhrlounge.com
+
+
+
+//.cpanel.yml
+
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/aaeesm5/demo.myhrlounge.com
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp style.css $DEPLOYPATH
+
+// ssh/config
+
+        Hostname github.com
+        IdentityFile=/home/aaeesm5/demo.myhrlounge.com
