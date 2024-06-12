@@ -1,0 +1,7 @@
+CMD open
+
+cd C:\Program Files\PostgreSQL\16\bin
+
+pg_dump -U postgres -s hr > D:\hrdb.sql
+
+Password

@@ -1,0 +1,10 @@
+<select name="cat_id" id="" required>
+
+    @foreach ($datas as $row)
+    <option value="{{ $row->id }}"  @selected	(old('id', $subcategory->cat_id) == 	$row->id) 
+     >
+        {{ $row->cat_name }}
+    </option>
+    @endforeach
+
+</select>
