@@ -1,0 +1,8 @@
+How to use it:
+- Unzip the file - you should get a patch file.
+- Apply this patch on a blank Laravel 10 project.
+- The snippets will be placed at .tinkerwell/snippets directory
+- The data files (csv, json, etc.) should be found at database/data directory
+- To try the code snippets, just place them in a controller action or a command - wherever you are comfortable to run Laravel code.
+
+ To run a patch file, go to your project root and run git apply path/to/file.patch
