@@ -1,0 +1,116 @@
+All outline: https://www.zend.com/training/php
+
+=============	 php-fundamentals-02 ======
+
+ https://www.zend.com/training/php-fundamentals-2
+	
+#1. Introductions
+
+Course introduction
+Prerequisite knowledge
+Course exercises
+Overall objective
+
+#2. PHP Configuration
+
+Configuration directives
+Run-time settable directives
+Web server PHP and CLI configuration
+Target environment configuration
+Technology stack configuration for the course VM
+
+#3. Object-Oriented PHP - Constructs
+
+The class construct
+Class constants, properties and methods
+Object instances
+Member visibility
+Static properties and methods
+Inheritance
+Overrides
+Magic methods
+Class and method abstraction
+Object interface
+Type hinting
+Traits
+Namespace
+Object cloning and comparison
+Functions that work with classes
+Exceptions
+
+#4. Object-Oriented PHP - Implementation
+
+Course application OOP implementation
+File structure organization
+Architectural thought of the course application
+Model/View/Controller design pattern implementation
+Controllers and input classes
+Core classes and their role
+Domain classes, services and business logic
+Form and input classes and abstraction
+Model classes and abstraction, database access and patterns
+View classes and layouts
+
+#5. PHP Standards
+
+Basic coding standard
+Logger interface and standard
+Autoloading and autoloading standard
+Caching interface and standard
+Messaging interface and standard
+
+
+#6. Database
+
+Databases
+The relational database engine
+Structured query language (SQL)
+Data modeling
+PhpMyAdmin MySQL admin
+Terminal MySQL
+PHP data objects (PDO) API
+Prepared statements
+Stored procedure
+Transactions
+Patterns in database design
+
+#7. Internet Communication
+
+Protocols and ports
+Client/Server
+HTTP/HTTPS
+Client side
+HTML web forms
+Server side
+Server side input validation
+Cookies
+Sessions
+Output control
+Headers and browser cachin
+
+#8. Composer
+
+Composer
+Composer files
+composer.phar
+composer.json
+Important composer commands
+The "vendor" directory
+Composer API docs and packages
+
+#9. Web Services
+
+Web services
+Data formats
+Parsing APIs
+Web service requests
+Soap services
+RESTful services
+Streams
+
+#10. Final Bindings
+
+Regular expressions
+Software unit testing
+PHP documenter
+Web security

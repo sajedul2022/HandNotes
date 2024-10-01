@@ -1,0 +1,52 @@
+Topic:
+1. Laravel 
+2. React ( Next JS)
+2.2 Tailwin CSS
+3. Vuex ( Nuxt js)
+4. JavaScript
+5. Php 
+6. Zend Vendor php
+7. MySql
+
+			Laravel :
+
+Tutorial : 
+
+https://www.youtube.com/watch?v=sccLfQ4_u10&list=PLbGui_ZYuhijEqjCa63l0GkWh5EsG5iTR
+
+https://www.youtube.com/watch?v=MYyJ4PuL4pY
+
+Project :  
+
+https://www.youtube.com/watch?v=ThcDACW4DkU&list=PLRheCL1cXHruG6bV4tAIF4AhkUMaABf3F
+
+https://www.youtube.com/watch?v=ThcDACW4DkU&list=PLRheCL1cXHruG6bV4tAIF4AhkUMaABf3F
+
+
+
+		React :
+
+
+Tutorial: Bohubrihi
+
+
+Project: 
+
+https://www.youtube.com/watch?v=GL48t3lY-tI&list=PLRheCL1cXHrtT6rOSlab8VzMKBlfL-IEA
+
+https://www.youtube.com/watch?v=wPQ1-33teR4&list=PLJT9n0q3md18xl4PWqzqNFUEp9DbBmogZ&index=15
+
+
+		MySql
+
+Tutorial: 
+
+https://www.youtube.com/watch?v=KlWOr2RwqM4&list=PL0b6OzIxLPbzf12lu5etX_vjN-eUxgxnr
+
+			
+
+			PHP
+Tutorial: 
+
+https://www.youtube.com/watch?v=a_qREkJ78f4&list=PL0b6OzIxLPbyrzCMJOFzLnf_-_5E_dkzs
+

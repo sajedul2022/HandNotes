@@ -1,0 +1,149 @@
+https://www.zend.com/training/php-certification-exam
+
+			=== List of Exam Topics ====
+# 1.PHP Basics
+
+Syntax
+Operators
+Variables
+Control Structures
+Language Constructs and Functions
+Namespaces 
+Extensions
+Config
+Performance/bytecode caching
+
+#2. Functions
+
+Arguments
+Variables
+References
+Returns
+Variable Scope
+Anonymous Functions, closures
+Type Declarations
+
+#3. Data Format & Types
+
+XML Basics
+SimpleXML
+XML Extension
+Webservices Basics
+SOAP
+JSON 
+DateTime 
+DOMDocument
+
+#4. Web Features
+
+Sessions
+Forms
+GET and POST data
+Cookies
+HTTP Headers
+HTTP Authentication
+HTTP Status Codes
+
+#5. Object Oriented Programming
+
+Instantiation
+Modifiers/Inheritance
+Interfaces
+Return Types
+Autoload
+Reflection
+Type Hinting
+Class Constants
+Late Static Binding
+Magic (_*) Methods
+Instance Methods & Properties
+SPL
+Traits 
+
+#6. Security
+
+Configuration
+Session Security
+Cross-Site Scripting
+Cross-Site Request Forgeries
+SQL Injection
+Remote Code Injection
+Email Injection
+Filter Input
+Escape Output
+Encryption, Hashing algorithms
+File uploads
+PHP Configuration
+Password hashing API 
+
+
+#7. I/O
+
+Files
+Reading
+Writing
+File System Functions
+Streams
+Contexts
+
+#8. Strings & Patterns
+
+Quoting
+Matching
+Extracting
+Searching
+Replacing
+Formatting
+PCRE
+NOWDOC
+Encodings
+
+#9. Databases & SQL
+
+SQL
+Joins
+Prepared Statements
+Transactions
+PDO
+
+#10. Arrays
+
+Associative Arrays
+Array Iteration
+Array Functions
+SPL, Objects as arrays 
+Casting
+
+#11. Error Handling
+
+Handling Exceptions
+Errors
+Throwables
+
+
+
+		=== Learn Topic ==
+Class Outline:
+
+1. https://www.zend.com/training/php-fundamentals-1
+
+2. https://www.zend.com/training/php-fundamentals-2
+
+3. https://www.zend.com/training/php-fundamentals-3
+
+4. https://www.zend.com/training/php-certification-test-prep
+
+5. https://www.zend.com/training/php-unit-testing-jumpstart
+
+
+
+# Others:
+
+6. PHP I: Foundations for IBM i
+	https://www.zend.com/training/php-i-foundations-ibmi
+
+7. PHP for Experienced Programmers
+	https://www.zend.com/training/php-experienced-programmer
+
+8. Building Security into your PHP Applications
+	
