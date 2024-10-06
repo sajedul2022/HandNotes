@@ -1,0 +1,11 @@
+
+Go to Terminal:
+cd C:\Program Files\PostgreSQL\16\bin
+
+Export: 
+
+pg_dump -h localhost -U postgres -W -d test_db >  D:\laragon\www\backup-ict\postgre\mybackup.sql
+
+Import:
+
+psql -h localhost -U postgres -W -d ict< D:\laragon\www\backup-ict\postgre\mybackup.sql
