@@ -17,21 +17,24 @@ app.get("/getFile", (req, res) => {
   res.sendFile(path.join(__dirname, "upload", "sc.jpg"));
 });
 
-// const port = 8000;
-// app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+const port = 8000;
+app.listen(port, () => console.log(`App listening on port ${port}!`));
 
-const url = 'mongodb+srv://sajedul:test-12345@cluster0.q05no.mongodb.net/?retryWrites=true&w=majority&tls=true';
-mongoose.connect(url, {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Database connected...");
-    app.listen(8000, () => {
-      I;
-      console.log("Server is running...");
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// const url = 'mongodb+srv://sajedul:test-12345@express.fqblq.mongodb.net/?retryWrites=true&w=majority&appName=express/';
+// mongoose.connect(url, {
+//     // useNewUrlParser: true,
+//     // useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("Database connected...");
+//     app.listen(8000, () => {
+//       I;
+//       console.log("Server is running...");
+//     });
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+
+
