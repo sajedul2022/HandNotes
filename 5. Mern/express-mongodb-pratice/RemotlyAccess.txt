@@ -1,0 +1,54 @@
+To change your DNS settings, follow the steps below based on your operating system:
+
+#Windows
+Open Network and Sharing Center:
+
+Press Win + R, type ncpa.cpl, and press Enter.
+Right-click on your active network connection:
+
+For wired connections, select Ethernet.
+For wireless connections, select Wi-Fi.
+Then click Properties.
+Select Internet Protocol Version 4 (TCP/IPv4):
+
+Highlight it in the list and click Properties.
+Set DNS Manually:
+
+Select Use the following DNS server addresses.
+Enter:
+Preferred DNS Server: 8.8.8.8
+Alternate DNS Server: 8.8.4.4
+(Or use Cloudflare: 1.1.1.1 and 1.0.0.1).
+Save Changes:
+
+Click OK and Close.
+Flush DNS Cache:
+
+Open Command Prompt (Win + R, type cmd, and press Enter).
+Run:
+bash
+Copy code
+ipconfig /flushdns
+
+
+
+# Router (Optional)
+If you'd like to configure DNS at the router level so all devices on the network benefit:
+
+Access Router Settings:
+
+Open a browser and go to your router's IP (e.g., 192.168.1.1 or 192.168.0.1).
+Log in with the admin credentials.
+Locate DNS Settings:
+
+Navigate to the DNS or Network section (varies by router model).
+Set Custom DNS:
+
+Set:
+Primary: 8.8.8.8
+Secondary: 8.8.4.4
+(Or Cloudflare DNS: 1.1.1.1 and 1.0.0.1).
+Save and Restart:
+
+Save changes and restart your router.
+After updating the DNS settings, restart your application and test the MongoDB connection!
