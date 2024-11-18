@@ -1,8 +1,8 @@
 const User = require("../models/User");
 
-// With Database
+// // With Database
 
-// index
+// // index
 const getAllUser = async (req, res) => {
   try {
     const users = await User.find();
@@ -20,7 +20,7 @@ const getAllUser = async (req, res) => {
   }
 };
 
-// Single index
+// // // Single index
 const getSingleUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -44,7 +44,7 @@ const getSingleUser = async (req, res) => {
   }
 };
 
-// create
+// // create
 const createNewUser = (req, res) => {
   // Validate and sanitize inputs
   const { name, email } = req.body;
@@ -76,7 +76,7 @@ const createNewUser = (req, res) => {
     });
 };
 
-// Update
+// // // Update
 
 const updateUser = async (req, res) => {
   const { id } = req.params;
@@ -103,7 +103,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-//  Delete
+// // //  Delete
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -128,7 +128,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
-// Without Databse
+// // Without Databse
 
 // let users = [
 //   {
@@ -151,7 +151,7 @@ const deleteUser = async (req, res) => {
 //   });
 // };
 
-// let singleUser = (req, res) => {
+// let getSingleUser = (req, res) => {
 //   const { id } = req.params;
 //   let result;
 //   for (let i = 0; i < users.length; i++) {
@@ -169,5 +169,9 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   getAllUser,
-  singleUser,
+  getSingleUser,
+  createNewUser,
+  updateUser,
+  deleteUser
+
 };
