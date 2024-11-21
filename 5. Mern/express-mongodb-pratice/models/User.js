@@ -39,6 +39,13 @@ const UserSchema = new Schema({
       message: "Password doesn't match",
     },
   },
+
+  role: {
+    type: String,
+    enum: ["admin", "manager", "stuff", "user"],
+    default: 'user',
+  },
+
 });
 
 UserSchema.pre("save", async function (next) {
@@ -53,13 +60,12 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
- 
-userSchema.method.comparePassword = async function (userPassword, hashPassword) {
+
+
+UserSchema.methods.comparePassword = async function (userPassword, hashPassword) {
   const result = await bcrypt.compare(userPassword, hashPassword);
   return result;
 }
-
-
 
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

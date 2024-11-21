@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 let signUp = (req, res) => {
   let user = new User({
@@ -33,31 +34,78 @@ let signIn = async (req, res) => {
     return res.status(400).json({ message: "Email and password are required" });
   }
 
-  // email check from databse exist or not try catch
+  // email check from database exist or not try catch
   try {
-
     let user = await User.findOne({ email });
+    console.log(user);
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // check if password matches
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid password" });
+    // Use the comparePassword method from the user instance
+    let result = await user.comparePassword(password, user.password);
+
+    if (result) {
+      // create jwt token
+      const token = jwt.sign({ id: user._id }, "my-secret-key", {
+        expiresIn: "1d",
+      });
+      return res
+        .status(200)
+        .json({ message: "JWT with Sign in successful", token });
+      // console.log(token);
+    } else {
+      return res.status(401).json({ message: "Invalid Password" });
+    }
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "Error during sign in", error: err.message });
+  }
+};
+
+// middleware to protect routes
+let protect = async (req, res, next) => {
+  const token = req.headers.authorization;
+  jwt.verify(token, "my-secret-key", async (err, data) => {
+    if (err) {
+      return res
+        .status(401)
+        .json({ ststus: "Failed", message: "Unauthorized" });
+    }
+    try {
+      const user = await User.findById(data.id);
+      if (!user) {
+        return res
+          .status(404)
+          .json({ status: "Failed", message: "User not found" });
+      }
+      req.user = user;
+      next();
+    } catch (err) {
+      console.error(err);
+    }
+  });
+};
+
+let permitedTo = (roles) => {
+  return (req, res, next) => {
+
+    if (!roles.includes(req.user?.role)) {
+      return res
+        .status(403)
+        .json({ status: "Failed", message: "Permission Denied" });
     }
 
-    res.status(200).json({ message: "Sign in successful", user });
-
-  } 
-  
-  catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: "Error during sign in", error: err.message });
-  }
+    next();
+  };
 };
 
 module.exports = {
   signUp,
   signIn,
+  protect,
+  permitedTo,
 };

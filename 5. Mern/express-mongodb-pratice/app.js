@@ -32,8 +32,10 @@ mongoose
   });
 
 
-// User Route 
+// API Route 
 const userRouter = require("./router/userRouter");
 const authRouter = require("./router/authRouter");
+const postRouter = require("./router/postRouter");
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/post", postRouter);
