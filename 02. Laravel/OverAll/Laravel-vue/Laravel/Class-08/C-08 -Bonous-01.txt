@@ -1,0 +1,115 @@
+----------------- Laravel Courses -----------
+#C-08 bonous-01
+
+-------------------- C-8(bonous-01) -----------------------
+
+1.  foreign key data multiple relation data show
+
+*go to app/Models/Course.php
+
+        ### fo rmultiple relation data: topics table  ###
+
+public function topics(){
+        return $this->belongsToMany(Topic::class, 'course-topic', 'course_id', 'topic_id');
+    }
+
+*go to database\seeders\DatabaseSeeder.php
+
+//Relation multiple data
+            $courses = Course::all();
+
+            foreach ($courses as $course) {
+                $topic_id_array = Topic::all()->random(rand(1, 5))->pluck('id')->toArray();
+                $course->topics()->attach($topic_id_array);
+
+                
+            }
+
+then cli:
+     php artisan migrate:fresh --seed
+
+
+            //Author seed
+
+            $authors = ['Sajedul', 'Author Name', 'Laraveljobs'];
+            foreach ($authors as $item) {
+                Author::create([
+                    'name' => $item,
+                ]);
+            }
+
+
+
+
+
+** go to app\Http\Controllers\CourseController.php
+
+public function show($id){
+        $course = Course::with('platform', 'topics')->findOrFail($id);
+        return $course;
+    }
+
+
+show result: http://localhost:8000/courses/3
+
+
+
+                     ### for multiple relation data: Author table  ###   
+
+1. *go to app/Models/Course.php
+
+public function authors(){
+        return $this->belongsToMany(Author::class, 'course-author', 'course_id', 'author_id');
+    }
+
+2. go to Seeders
+
+ $courses = Course::all();
+
+            foreach ($courses as $course) {
+
+                // topic
+                $topics = Topic::all()->random(rand(1, 5))->pluck('id')->toArray();
+                $course->topics()->attach($topics);
+
+                // author
+
+                $authors = Author::all()->random(rand(1, 3))->pluck('id')->toArray();
+                $course->authors()->attach($authors);
+
+                
+            }
+
+
+then cli:
+     php artisan migrate:fresh --seed
+
+
+
+                ### for multiple relation data:  course-series table  ###   
+
+1. *go to app/Models/Course.php
+
+public function series(){
+        return $this->belongsToMany(Series::class, 'course-series', 'course_id', 'series_id');
+    }
+
+2. go to Seeders
+
+            $series = Series::all()->random(rand(1, 4))->pluck('id')->toArray();
+            $course->series()->attach($series);
+
+
+3.  go to app\Http\Controllers\CourseController.php
+
+public function show($id){
+        $course = Course::with('platform', 'topics', 'series')->findOrFail($id);
+        return $course;
+    }
+
+
+
+then cli:
+     php artisan migrate:fresh --seed
+
+show result: http://localhost:8000/courses/3

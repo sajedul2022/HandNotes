@@ -1,0 +1,15 @@
+## One To One (model)
+
+parent: return $this->hasOne(Profile::class);
+child: return $this->belongsTO(User::class);
+
+
+## One To Many (model)
+
+parent: return $this->hasMany(Profile::class);
+child: return $this->belongsTO(User::class);
+
+## Many To Many (model)
+
+parent: return $this->belongsTO(Profile::class);
+child: return $this->belongsTO(User::class);

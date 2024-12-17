@@ -1,0 +1,36 @@
+Model.find(): This query retrieves all documents from a collection that match a given condition. For example, Model.find({name: "John"}) will retrieve all documents where the name field is "John".
+
+Model.findOne(): This query retrieves the first document from a collection that matches a given condition. For example, Model.findOne({name: "John"}) will retrieve the first document where the name field is "John".
+
+Model.findById(): This query retrieves a document from a collection based on its ID. For example, Model.findById("1234567890abcdef") will retrieve the document with the ID of "1234567890abcdef".
+
+Model.updateOne(): This query updates a single document that matches a given condition. For example, Model.updateOne({name: "John"}, {age: 30}) will update the first document where the name field is "John" and set the age field to 30.
+
+Model.updateMany(): This query updates multiple documents that match a given condition. For example, Model.updateMany({name: "John"}, {age: 30}) will update all documents where the name field is "John" and set the age field to 30.
+
+Model.deleteOne(): This query deletes a single document that matches a given condition. For example, Model.deleteOne({name: "John"}) will delete the first document where the name field is "John".
+
+Model.deleteMany(): This query deletes multiple documents that match a given condition. For example, Model.deleteMany({name: "John"}) will delete all documents where the name field is "John".
+
+Model.count(): This query counts the number of documents in a collection that match a given condition. For example, Model.count({name: "John"}) will count the number of documents where the name field is "John".
+
+Model.sort(): This query sorts the results of a query based on a given field. For example, Model.find().sort({name: 1}) will retrieve all documents and sort them in ascending order based on the name field.
+
+Model.limit(): This query limits the number of documents returned by a query. For example, Model.find().limit(10) will retrieve the first 10 documents from the collection.
+
+====================================================================================
+
+
+Model.distinct(): This query returns an array of distinct values for a specified field in a collection. For example, Model.distinct('name') will return an array of distinct values for the name field.
+
+Model.aggregate(): This query allows for complex aggregation operations on a collection. It enables you to perform operations such as grouping, filtering, and counting data. For example, Model.aggregate([{ $group: { _id: '$name', count: { $sum: 1 } } }]) groups the documents by the name field and returns the count of documents for each unique name.
+
+Model.populate(): This query is used to populate referenced documents in other collections. For example, if a document in a users collection has a reference to a document in a posts collection, you can use Model.populate('posts') to populate the referenced posts document.
+
+Model.find().lean(): This query returns a plain JavaScript object instead of a Mongoose document object. This can be useful for performance reasons, as plain objects are faster to create and manipulate than Mongoose documents.
+
+Model.findOneAndUpdate(): This query finds a single document and updates it. It returns the updated document by default. For example, Model.findOneAndUpdate({name: "John"}, {age: 30}) will find the first document where the name field is "John" and set the age field to 30.
+
+Model.findOneAndDelete(): This query finds a single document and deletes it. It returns the deleted document by default. For example, Model.findOneAndDelete({name: "John"}) will find the first document where the name field is "John" and delete it.
+
+Model.countDocuments(): This query counts the number of documents in a collection that match a given condition, similar to Model.count(). However, Model.countDocuments() is faster and more efficient than Model.count().

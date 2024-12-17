@@ -1,0 +1,19 @@
+controller->action class->Service Class-> model / DBAL ==> database
+
+# Controller == Action class
+# Service Class == Model Class
+
+// controller/command ==> service class ==> model / DBAL ==> database
+
+ 
+// controller/command ==> service class ==> repository ==> model / DBAL ==> database
+
+        
+
+// controller/command ==> action class ==> ??
+
+dto- Data Transfer object
+https://ashallendesign.co.uk/blog/data-transfer-objects-dtos-in-php
+
+
+

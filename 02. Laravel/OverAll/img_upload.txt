@@ -1,0 +1,36 @@
+ ===================== Image upload ==============
+
+1. app\Http\Controllers\ProductController.php
+
+$validate = $request->validate([
+            'product_name' => 'required',
+            'product_details' => 'required',
+            'product_price' => 'required',
+            'product_category' => 'required',
+            'product_stock' => 'required',
+            'product_image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if($validate){
+
+
+	if($request->product_image){
+                $imageName = time().'.'.$request->product_image->extension();
+                $request->product_image->move(public_path('product_photos'), $imageName);
+                $data->product_image =  $imageName;
+            }else{
+                $data->product_image =  "";
+            }
+     $data->save();
+
+
+}
+
+    
+
+2. resources\views\backend\products\create.blade.php
+
+    <input class="form-group" type="file" name="product_image" id="product_image">
+
+3. resources\views\backend\products\index.blade.php   show imageName
+    src="{{ 'product_photos/'.$product->product_image }}"

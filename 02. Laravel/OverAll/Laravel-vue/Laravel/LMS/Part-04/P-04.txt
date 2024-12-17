@@ -1,0 +1,144 @@
+ ========== Class 04 ========
+1. php artisan make:factory LeadFactory --model=Lead
+
+2. database\factories\LeadFactory.php
+
+    return [
+            'name' => $this->faker->name,
+            'email' => $this->faker->email,
+            'phone' => $this->faker->phoneNumber
+        ];
+3. Seeder
+        Lead::factory(100)->create();
+
+4. php artisan migrate:fresh --seed
+
+
+
+** Curriculum factory
+
+1. php artisan make:factory CurriculumFactory --model=Curriculum
+  upper step same 1,2,3
+
+** create role
+                        === old ====
+ // \App\Models\User::factory(10)->create();
+
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        // user
+        // $user = new User();
+        // $user->name = 'Super Admin';
+        // $user->email = 'super-admin@lms.com';
+        // $user->password = bcrypt('super@admin.com');
+        // $user->save();
+
+        $user = User::create([
+            'name' => 'Super Admin',
+            'email' => 'super-admin@lms.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        //  user role
+        $role = Role::create([
+            'name'=> 'Super Admin'
+        ]);
+
+        $permission = Permission::create([
+            'name'=> 'create-admin'
+        ]);
+
+        $role->givePermissionTo($permission);
+        $permission->assignRole($role);
+
+        $user->assignRole($role);
+
+
+        //  Communication role
+
+        $CommunicationRole = Role::create([
+            'name'=> 'Communication'
+        ]);
+
+        $user = User::create([
+            'name' => 'Communication Team',
+            'email' => 'communication@lms.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $user->assignRole($CommunicationRole);
+
+        // course
+        $course = Course::create([
+            'name' => 'Laravel',
+            'description' => 'Laravel LMS project that shows the Education Busisness logic.',
+            'image' => 'http://www.w3.org/2000/svg',
+            'image' => 'http://www.w3.org/2000/svg',
+            'user_id' => $teacher->id
+        ]);
+
+            ============ New formate OOP Code  ============
+
+<?php
+
+namespace Database\Seeders;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Course;
+use App\Models\Curriculum;
+use App\Models\Lead;
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
+class DatabaseSeeder extends Seeder{
+
+    public function run(){
+
+        $this->create_user_with_role('Super Admin', 'Super Admin', 'super-admin@lms.test');
+        $this->create_user_with_role('Communication', 'Communication Team', 'communication@lms.test');
+        $teacher = $this->create_user_with_role('Teacher', 'Teacher', 'teacher@lms.test');
+
+
+        // create leads
+        Lead::factory(100)->create();
+
+        $course = Course::create([
+            'name' => 'Laravel',
+            'description' => 'Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the foundation — freeing you to create without sweating the small things.',
+            'image' => 'https://laravel.com/img/logomark.min.svg',
+            'user_id' => $teacher->id
+        ]);
+
+
+        Curriculum::factory(10)->create();
+    }
+
+    private function create_user_with_role($type, $name, $email){
+
+         $role = Role::create([
+                'name'=> $type
+            ]);
+
+        $user = User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => bcrypt('password')
+        ]);
+
+        if ($type == 'Super Admin') {
+            $permission = Permission::create([
+                'name' => 'create-admin'
+            ]);
+            $role->givePermissionTo($permission);
+        }
+
+        $user->assignRole($role);
+
+        return $user;
+    }
+}

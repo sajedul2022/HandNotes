@@ -1,0 +1,79 @@
+All outline: https://www.zend.com/training/php
+
+=============	 php-fundamentals-1 ======
+
+https://www.zend.com/training/php-fundamentals-1
+	
+#1.Intro to Programming
+
+Language and the Logic of Programming
+Types of Programming Languages and Vocabulary
+What is PHP
+Why use PHP
+
+#2.PHP Language Basics 
+
+Syntax
+Quotes
+Comments
+Special Characters
+Data Types
+Precedence
+Symbols
+
+#3. PHP Identifiers
+
+Variables
+Constants
+Arrays
+
+#4. PHP Control Flow Basics
+
+Operators
+Conditionals
+
+#5. PHP Functional Basics
+
+Functions
+Function Design Tools
+File Systems (Handling)
+
+#6. File System Basics
+
+Constants
+Commonly Used File Functions
+File System Performance
+
+#7. PHP Web Concepts
+
+Client/Server Communications
+How to embed PHP into HTML
+How to embed HTML into PHP
+Validating and Escaping
+Cookies
+Sessions
+$_GET and $_POST
+
+#8. PHP Database Basics
+
+Introduction to Relationship Databases
+Keywords and Statements in SQL
+Using PHP Functions with the MySQL Data Engine
+
+#9. Developing PHP Apps
+
+General Software Development 
+Application Structure Guidelines
+Organizing a concept solution
+Application Skeleton
+Debugging Techniques
+Security
+
+#10. Final Bindings
+
+OrderApp File Structure
+OrderApp Architecture
+OrderApp Request/Response Cycle
+OrderApp Step Through
+Resources
+Course Summary

@@ -1,0 +1,15 @@
+-------------- #4 route validation [Regular Expression] ------------
+
+1. Making Routes: routes/api.php
+
+
+
+	// Regular Expression validation
+Route::get('/users/{name?}', function($name=null){
+    return( "Hello $name!");
+})->where('name', '[a-zA-Z]+');
+
+
+Route::get('/user2/{id?}', function($id=null){
+    return "Hello $id!";
+})->where('id', '[0-9]+');

@@ -1,0 +1,14 @@
+--------- git pull and system  -----------
+1. After git pull
+	composer install/update
+
+2.  .env create and db connection
+
+3. php artisan key:generate
+4. php artisan migrate
+5. php artisan db:seed
+6. npm install
+7. npm run dev
+
+
+

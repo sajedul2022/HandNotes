@@ -1,0 +1,28 @@
+-------- #6 Route Match and Route Any ---------
+
+
+
+// match Route
+Route::match(['get', 'post'], '/student', function(Request $req){
+    return "Method: ". $req->method();
+});
+
+Route::any('/any', function(Request $req){
+    return "Method: ". $req->method();
+});
+
+
+Go to: 
+https://restless-sunset-221816.postman.co/workspace/My-Workspace~00b56b90-02f9-45aa-8782-de73e5bf48a2/request/create?requestId=0da807c5-9d6b-4226-a4fa-0468ed41d8d6
+
+http://localhost:8000/api/any
+
+
+
+
+
+
+
+
+
+

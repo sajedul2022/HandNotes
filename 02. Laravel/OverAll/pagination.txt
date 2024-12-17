@@ -1,0 +1,25 @@
+
+1. https://laravel.com/docs/9.x/pagination#paginating-eloquent-results
+
+set 
+
+	Route::get('/users', function () {
+
+    		return User::paginate(5);
+
+	});
+
+2. {{ $users->links() }}  // paginate call links()
+
+And 
+
+
+
+3. php artisan vendor:publish --tag=laravel-pagination
+
+4.  {{ $paginator->links('view.name') }}
+
+set specific view file
+	
+	{{ $paginator->links('vendor.pagination.bootstrap-4') }}
+ 

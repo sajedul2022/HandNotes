@@ -1,0 +1,6 @@
+<option {{ old('product_category') ? (old('product_category') == $cat->id ? 'selected' : '') : ($product->product_category == $cat->id ? 'selected' : '' ) }}
+                value="{{ $cat->id }}">
+
+                {{ $cat->cat_name }}
+
+        </option>

@@ -1,0 +1,14 @@
+public function index(Request $request)
+    {
+        $data['user'] = Auth::user();
+        $data['cdefs'] = CompanyDefinition::paginate(10);
+
+        if ($request->wantsJson()) {
+            return response()->json($data);
+        } else {
+            return Inertia::render('Admin/ComProfile/ComDef/Index', $data);
+        }
+    }
+
+api.php
+Route::resource('companydef', CompanyDefinitionController::class);

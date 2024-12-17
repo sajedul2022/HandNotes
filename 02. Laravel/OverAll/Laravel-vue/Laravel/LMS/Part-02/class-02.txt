@@ -1,0 +1,55 @@
+========== Class -02 ========
+
+1. model File configaration
+    like relation table with others table  :
+
+        public function curriculums(){
+            return $this->hasMany(Curriculum::class);
+        }
+
+
+*** create role ***
+https://spatie.be/docs/laravel-permission/v5/basic-usage/basic-usage
+
+2. User.php model
+
+use Spatie\Permission\Traits\HasRoles;
+    class User extends Authenticatable
+    {
+        use HasApiTokens, HasFactory, Notifiable , HasRoles;
+
+        //..
+    }
+
+7. Database Seeder
+
+    use Spatie\Permission\Models\Role;
+    use Spatie\Permission\Models\Permission;
+
+    public function run(){
+
+        $user = new User();
+        $user->name = 'Super Admin';
+        $user->email = 'super@admin.com';
+        $user->password = bcrypt('super@admin.com');
+        $user->save();
+
+        $role = Role::create([
+            'name'=> 'Super Admin'
+        ]);
+
+        $permission = Permission::create([
+            'name'=> 'create-admin'
+        ]);
+
+        $role->givePermissionTo($permission);
+        $permission->assignRole($role);
+
+        $user->assignRole($role);
+
+        //..
+    }
+
+    than cli: php artisan migrate:fresh --seed
+
+

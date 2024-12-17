@@ -1,0 +1,121 @@
+========== Git Commands: ===========
+
+Working Directory: Local Direcory : Remote Directory
+git config --list
+
+// for User Config
+git config --global user.name "sajedul2022"
+git config --global user.email=sajedul.idb.info@gmail.com
+
+pwd  // Present Directory
+touch readme.md
+git status
+git init
+ls // list show 
+ls -a // hidden file show
+git add --all / git add .(Present Directory, Not Sub folder add, But Root Directory is fine) / git add filename
+git commit -m "New file readme and Git command handnote file created"
+git log/ git log --oneline  // History for comment
+vi readme.md // :q for close
+touch help.md
+
+// revert previous comment:
+
+git reset --hard a1f5460 // revert previous comment and Id head 
+git reflog // show all comment ID
+git reset --hard 8c4adf9 // revert code with comment id
+
+git rm help.md // remove file 
+
+// Branch
+git branch --list // show list
+git branch dev/add-heading-text // create branch as master sub branch
+git branch -d dev/add-heading-text // delete branch
+git switch dev/add-heading-text // switch another branch
+git branch -m feature/add-heading-text // rename branch 
+
+git branch feature/fix-text
+git switch feature/fix-text
+
+// Merge Branch 
+git switch master
+git merge feature/add-heading-text
+
+Steps Merge: 
+pull Request and compare -> compare then create pull request -> merge and confirm merge
+
+Contributor: git switch branchname
+            git add .
+            .....
+            git push -u origin branchname
+
+// conflict
+show both branch code and edit 
+git add .
+git commit 
+:wq
+
+// Stash: switch another branch without commiting
+git stash
+// later show or add 
+git stash list 
+git stash show -p
+:q
+git stash pop
+git stash apply stashId
+git add .
+git commit 
+
+// git ignore 
+mkdir node_modules
+touch .gitignore
+
+// already coomit file , need to ignore
+git rm --cached abcd.md
+git rm --cached node_modules
+git diff .gitignore
+
+======== Git hub ======
+
+// create a new repository on the command line
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/sajedul2022/Github-Lesson.git
+git push -u origin main
+
+// push an existing repository from the command line
+
+git remote add origin https://github.com/sajedul2022/Github-Lesson.git
+git branch -M main
+git push -u origin main
+
+
+// update data after push, merge pull request
+
+git pull
+
+// Multiple Git hub repository কিভাবে দুইটি রিপোজিটরিতে একই কোড পুশ করবেন
+
+নিচের কমান্ড গুলো ফলো করুন :
+git init
+git add .
+git commit -m "First commit"
+git branch -M main
+git remote add vercel YOUR_PERSONAL_ACCOUNT_REPOSITORY_HTTPS_URL
+git remote add code LWS_CLASSROOM_REPOSITORY_HTTPS_URL
+git branch -M main
+git push vercel main
+git push code main
+মনে রাখবেন পুশ করার সময় খেয়াল রাখবেন আপনি কোন ব্রাঞ্চে আছেন আর কোন ব্রাঞ্চে পুশ করতেছে। Git bash Terminal এ দেখতে পারবেন আপনি কোন ব্রাঞ্চে আছেন বর্তমানে।
+এরকম হলে ব্রাঞ্চ পরিবর্তন করে আবার পুশ করেন।
+git branch -M main
+এর পরেও না হলে:
+
+.git হিডেন ফোল্ডার ডিলিট দিয়ে আবার চেষ্টা করুন।
+
+
+
+

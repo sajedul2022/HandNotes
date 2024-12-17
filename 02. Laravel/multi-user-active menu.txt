@@ -1,0 +1,28 @@
+  public function index()
+    {
+
+        $type = session('type');
+        $type = auth()->user()->type;
+
+        if ($type === 0) {
+            return view('components.dashboard');
+            // return include('./../../frontend/src/pages/Home.jsx');
+        }
+        if ($type === 1) {
+            return view('components.userdash');
+        }
+
+    }
+
+=========== active menu =======
+
+<span
+                    class="nav-link {{ Request::segment(1) !== 'users' || Request::segment(1) !== 'roles' ? 'collapsed' : '' }} d-flex justify-content-between align-items-center"
+                    data-bs-toggle="collapse" data-bs-target="#submenu-users">
+
+
+	<div class="multi-level collapse {{ Request::segment(1) == 'users' || Request::segment(1) == 'roles' ? 'show' : '' }}"
+                    role="list" id="submenu-users" aria-expanded="false">
+</div>
+
+</span>

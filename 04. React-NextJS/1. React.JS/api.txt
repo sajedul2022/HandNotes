@@ -1,0 +1,95 @@
+                              ===== Laravel react ==
+
+  npm i react-axios
+
+  ==== React with Laravel =====
+
+
+https://legacy.reactjs.org/docs/faq-ajax.html
+
+0. npm i axios
+
+
+1. php artisan make:controller frontend/BasicController
+
+    public function index()
+    {
+        $basics = Basic::get();
+
+        echo json_encode(['Success' => "Yes", 'datas' => $basics]);
+
+    }
+
+
+2. routes\Api.php
+
+    use App\Http\Controllers\frontend\BasicController as FrontendBasicController;
+    Route::get('/basic-frontend', [FrontendBasicController::class, 'index'])->name('basic.fe');
+
+
+OR
+    Route::get('/basic-fe', function () {
+    $basics = Basic::get();
+    return response()->json($basics);
+    });
+
+
+3. json data link
+    http://127.0.0.1:8000/api/basic-fe
+
+
+4. config\cors.php
+
+     'allowed_origins' => ['http://localhost:3000/'],
+
+    php artisan optimize
+
+
+
+5. specific page.js
+
+
+import React, { useEffect, useState } from "react";
+
+const [getuserdata, setUserdata] = useState([]);
+  console.log(getuserdata);
+
+  const getdata = async () => {
+    const res = await fetch("http://127.0.0.1:8000/api/news-fe", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (res.status === 422 || !data) {
+      console.log("error ");
+    } else {
+      setUserdata(data);
+      console.log("get data");
+    }
+  };
+
+  useEffect(() => {
+    getdata();
+  }, []);
+
+
+
+ {getuserdata.map((element, id) => {
+    return (
+      <>
+
+        <tr>
+            <th scope="row" key={id} item={element}>{id + 1}</th>
+            <td>{element.name}</td>
+            <td>{element.email}</td>
+            
+        </tr>
+      
+      </>
+    )
+})}

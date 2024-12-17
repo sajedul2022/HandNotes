@@ -1,0 +1,107 @@
+	---- Class-06 Email Notification || Mailtrap ----
+
+	##### Mailtrap  ######
+1. go to https://mailtrap.io/inboxes/2011958/messages
+
+and  SMTP Settings  laravel 7
+
+go to .env and paste
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=c51c044cb45275
+MAIL_PASSWORD=fb4da91d2383dd
+MAIL_ENCRYPTION=tls
+
+
+
+2. cli // cache clear, event clear and more 
+    php artisan optimize:clear 
+
+3. go to http://localhost:8000/forgot-password    and reset password via mailtap 
+
+
+
+            ##### Email Notification  ######
+
+
+1. Go to models>User.php 
+check Notifiable has?
+
+use HasApiTokens, HasFactory, Notifiable;
+
+cli 
+    php artisan make:notification PostCreated 
+
+    see file created
+    laravel-vue3\app\Notifications\PostCreated.php
+
+2.web.php file
+
+//created test notification route  Route::middleware('auth')->group(function () {  This placce.. }
+
+Route::get('/notification-test',function(){
+
+        $user = \Illuminate\Support\Facades\Auth::user();
+
+        $user->notify(new PostCreated); return'ok'; 
+});
+
+3. visit http://localhost:8000/notification-test
+
+and visit mailtrap
+
+
+4. PostController.php   
+
+// Email notification setup pot created
+
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\PostCreated;
+
+ function add(){
+    ....
+    // Email notification setup pot created
+       $user = Auth::user(); 
+        $user->notify(new PostCreated($post));
+
+ }
+
+ 5. PostCreated.php   create notification set up new post
+
+ public $post;
+
+ public function __construct($post)
+    {
+        $this->post = $post;
+    }
+
+// use
+
+    public function toMail($notifiable) {
+
+        return (new MailMessage)
+        
+        ->subject('New Post Created')
+        
+        ->line('The introduction to the notification.')
+        
+        ->action('Click here to view the post', route('edit-post', $this->post->id)) ->line('Thank you for using our application!');
+        
+        }
+
+More learn:
+https://laravel.com/docs/9.x/notifications
+
+
+
+
+
+
+
+
+
+and more deails
+
+https://blog.shikhun.net/4kav4ken4kay4ka4ka4iocmqocmgucmgy3gp6w

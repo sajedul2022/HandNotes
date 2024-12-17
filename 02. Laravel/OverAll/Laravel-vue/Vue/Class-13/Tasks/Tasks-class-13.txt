@@ -1,0 +1,14 @@
+---------- Task class- 13 -----------
+
+
+1. See  crash course Vue
+	https://www.youtube.com/watch?v=qZXt1Aom3Cs
+	https://vueschool.io/lessons/getting-started-with-vuejs
+
+2. Read documentaion Vue
+	https://vuejs.org/guide/introduction.html
+
+3. Vite Learn
+	https://vitejs.dev/guide/
+	https://vueschool.io/lessons/guided-nuxtjs-project-tour
+

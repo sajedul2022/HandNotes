@@ -1,0 +1,10 @@
+                      ## Link  css  ##
+
+<link rel="stylesheet" href="{{ asset('css/main.css') }}">
+
+
+                         ### Image ###
+
+<img src="{{ asset('images/'.$project->image_01) }}" width="100px">
+
+src="{{ asset('images/1.png') }}"

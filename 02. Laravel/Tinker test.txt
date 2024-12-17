@@ -1,0 +1,13 @@
+<?php
+use Illuminate\Http\Request;
+use App\Models\User;
+
+$form_email = 'employee@gmail.com';
+$form_name = 'ee';
+
+$user = User::where('email', $form_email)->first();
+$user->name = $form_name;
+
+$user->save();
+
+$user;

@@ -1,0 +1,78 @@
+All outline: https://www.zend.com/training/php
+
+=============	 php-fundamentals-03 ======
+
+https://www.zend.com/training/php-fundamentals-3
+	
+#1. PHP Advance Cases
+
+DateTime API
+Generators
+Generator delegation
+Anonymous classes
+Predefined interfaces
+Object serialization
+Closure class
+Generator class
+Type declarations
+PHP recent additions
+
+#2. Standard PHP Library
+
+SPL
+Standard data structures
+Iterators
+Interfaces
+SPL exceptions
+SPL Function Library
+PSR-4 Autoloader
+
+#3. PHP Advanced Techniques
+
+Command line interface (CLI)
+PHP CLI shell script
+Input/Output (IO)
+Caching and JIT
+Extensions
+Foreign Function Interface
+Custom extension development
+Custom PHP
+
+#4. Targeted Server Environments
+
+Continuous Delivery (CD)
+CD keys and important factors
+CD configuration management
+CD Git DVCS
+CD Phing build tool
+CD Jenkins CI
+Jmeter load testing
+
+#5. Docker
+
+The Docker Daemon
+The Dockerfile
+Docker Containers
+Docker Compose
+Docker Best Practices
+
+#6. Web APIs
+
+URL Parsing
+Web APIs
+REST endpoints and resources
+REST Service Code Review
+
+# PSR-7 Messaging and Middleware
+
+PSR-7: HTTP message interfaces
+PSR-15: HTTP server request handlers
+Middleware
+
+
+#8. Asynchronous Programming
+
+The Async Programming Model
+The Swoole Extension
+Mezzio Swoole Support
+PHP 8.1 Fibers

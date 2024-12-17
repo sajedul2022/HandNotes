@@ -1,0 +1,23 @@
+-------------- Basic ------------
+1. Installation 
+	composer create-project laravel/laravel your-project-name
+
+2.Run Project
+	php artisan serve
+
+
+
+-----------------  File map ----------------- 
+
+1. Controller
+App>http>controller
+
+2. View
+resource>views
+
+3. Model
+app>model
+
+4. Route
+Directory> routes>web.php
+

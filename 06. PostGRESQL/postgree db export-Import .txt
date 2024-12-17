@@ -1,0 +1,11 @@
+CMD open
+
+cd C:\Program Files\PostgreSQL\16\bin
+
+pg_dump -U postgres -s hr > D:\hrdb.sql
+
+Password
+
+// import pgsql command
+
+psql -U username dbname < D:\hrdb.sql

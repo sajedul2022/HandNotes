@@ -1,0 +1,27 @@
+            ================ Class-05 ===============
+
+** P# 05 Multi User and  Leads show use:livewire
+Multi User:
+1. Seeder
+    $this->create_user_with_role('Leads', 'Leads', 'leads@lms.test');
+    php artisan migrate:fresh --seed
+
+2. leads resource Controller make
+    php artisan make:controller LeadController --resource
+3. web.php
+    Route::resource('lead', LeadController::class);
+
+    and Links
+        <x-nav-link :href="route('lead.index')" :active="request()->routeIs('lead.index')">
+            {{ __('Leads') }}
+        </x-nav-link>
+
+4. Leads make index livewire
+    php artisan livewire:make LeadIndex
+
+** Lead works
+resources\views\lead\index.blade.php
+     <livewire:lead-index />  // link to livewire tag
+And
+resources\views\livewire\lead-index.blade.php
+     <h2>Test</h2> // write code to one parent div under any code like table

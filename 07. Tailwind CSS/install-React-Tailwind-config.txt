@@ -1,0 +1,21 @@
+
+npm create vite@latest tic-tac-toe -- --template react
+
+npm install -D tailwindcss postcss autoprefixer
+
+npx tailwindcss init -p
+
+
+// tailwind.config.js:
+
+content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+
+// src -> index.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+

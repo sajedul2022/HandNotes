@@ -1,0 +1,111 @@
+                ========== Class 01 ===========
+
+1. https://spatie.be/docs/laravel-permission/v5/installation-laravel  //  User Permission set update as 
+2. https://php-flasher.io/laravel                                      // Laravel Flasher setup
+
+*** create role ***
+https://spatie.be/docs/laravel-permission/v5/basic-usage/basic-usage
+
+3. User.php model set HasRoles()
+
+	use Spatie\Permission\Traits\HasRoles;
+
+    class User extends Authenticatable
+    {
+        use HasApiTokens, HasFactory, Notifiable , HasRoles;
+
+        //..
+    }
+
+4. Database Seeder
+
+    use Spatie\Permission\Models\Role;
+    use Spatie\Permission\Models\Permission;
+
+    public function run(){
+
+        $defaultPermissions = ['lead-management', 'create-admin'];
+        foreach ($defaultPermissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
+
+        $this->create_user_with_role('Super Admin', 'Super Admin', 'super-admin@lms.test');
+        $this->create_user_with_role('Communication', 'Communication Team', 'communication@lms.test');
+        $teacher = $this->create_user_with_role('Teacher', 'Teacher', 'teacher@lms.test');
+        $this->create_user_with_role('Leads', 'Leads', 'leads@lms.test');
+
+	//  admin set all permission 
+
+    	if ($type == 'Super Admin') {
+
+            $role->givePermissionTo(Permission::all());
+
+    	}elseif($type == 'Leads') {
+
+            $role->givePermissionTo('lead-management');
+        }
+
+
+
+	private function create_user_with_role($type, $name, $email){
+
+        $role = Role::create([
+            'name' => $type
+        ]);
+
+        $user = User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => bcrypt('password')
+        ]);
+
+        if ($type == 'Super Admin') {
+            $role->givePermissionTo(Permission::all());
+        } elseif ($type == 'Leads') {
+            $role->givePermissionTo('lead-management');
+        }
+
+        $user->assignRole($role);
+
+        return $user;
+        }
+
+
+        //.. code go 
+    }
+
+    than cli: php artisan migrate:fresh --seed
+
+
+
+5. Check other user hasPermissionTo()
+
+app\Http\Controllers\LeadController.php
+
+
+     public function index(FlasherInterface $flasher){
+
+        $user = Auth::user();
+        $check = $user->hasPermissionTo('lead-management');
+
+        if(!$check) {
+            $flasher->addWarning('You are not authorized to access this page');
+            return redirect()->route('dashboard');
+        }
+
+
+        return view('lead.index');
+    }
+
+6. Set Lead user to lead menu show  and others do not show lead page
+resources\views\layouts\navigation.blade.php
+
+    @can('lead-management')
+                        <x-nav-link :href="route('lead.index')" :active="request()->routeIs('lead.index')">
+                            {{ __('Leads') }}
+                        </x-nav-link>
+    @endcan
+
+
+
+	than cli: php artisan migrate:fresh --seed
