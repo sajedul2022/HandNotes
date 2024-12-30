@@ -11,6 +11,8 @@ import {
 import { create } from 'domain';
 import { get } from 'http';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
+import { CreateUserPostDto } from 'src/users/dtos/CreateUserPost.dto';
+import { CreateUserProfileDto } from 'src/users/dtos/CreateUserProfile.dto';
 import { UpdateUserDto } from 'src/users/dtos/UpdateUser.dto';
 import { UsersService } from 'src/users/services/users/users.service';
 
@@ -47,4 +49,23 @@ export class UsersController {
   async deleteUserById(@Param('id', ParseIntPipe) id: number) {
     await this.userService.deleteUser(id);
   }
+
+  // profile routes with users and profile
+  @Post(':id/profiles')
+   createProfile(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() createUserProfileDto: CreateUserProfileDto,
+  ){
+     return this.userService.createUserProfile(id, createUserProfileDto);
+  }
+
+  // Post routes with users and post one to many relationship
+  @Post(':id/posts')
+   createPost(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() createUserPostDto: CreateUserPostDto,
+  ){
+     return this.userService.createUserPost(id, createUserPostDto);
+  }
 }
+ 

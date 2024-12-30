@@ -25,6 +25,13 @@ docker tag 7f51a5914209 sajedul2022/docter-test
 docker images
 docker push sajedul2022/docter-test
 
+
+======= another repo ========
+docker login 
+docker tag travelsio-backend-nestjs_api:latest sajedul2022/travelsio-backend-nestjs_api
+docker push sajedul2022/travelsio-backend-nestjs_api:latest
+
+
 # pull Others computer / docker / pc / online play etc
 
 Like: https://labs.play-with-docker.com/

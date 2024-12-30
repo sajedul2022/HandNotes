@@ -1,0 +1,70 @@
+
+
+=========  Build  ========= 
+
+# devlopment 
+docker build -t travelsio-backend .
+
+- after build in docker app
+docker run -p 8080:8080 travelsio-backend
+
+# Production 
+docker build -t travelsio-backend-prod -f Dockerfile.prod .
+
+docker run -p 8080:8080 travelsio-backend-prod
+
+=========  Compose  ========= 
+
+## Development:
+
+#1. create - docker-compose.yml
+
+services:
+  nestjs_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      - PORT=8080
+      - NODE_ENV=development
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run start:dev
+
+
+# 2. devlopment compose
+docker-compose up --build
+
+#3. tsconfig
+// others code ,
+
+"WatchOptions": {
+    // Use a dynamic polling instead of system's native events for file changes.
+    "WatchFile": "dynamicPriorityPolling",
+    "watchDirectory": "dynamicPriorityPolling",
+    "excludeDirectories": [
+      "**/node_modules",
+      "dist"
+    ]
+  }
+
+## Production:
+
+1. docker-compose -f docker-compose.prod.yml up --build
+
+OR
+ docker-compose -f docker-compose.prod.yml up --build -d
+
+
+====== Deploy Push =====
+
+docker login 
+docker tag travelsio-backend-nestjs_api:latest sajedul2022/travelsio-backend-nestjs_api
+docker push sajedul2022/travelsio-backend-nestjs_api:latest
+
+
+
