@@ -7,9 +7,12 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UseInterceptors,
 } from '@nestjs/common';
+import { log } from 'console';
 import { create } from 'domain';
 import { get } from 'http';
+import { UsersInterceptor } from 'src/interceptors/user.interceptors';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import { CreateUserPostDto } from 'src/users/dtos/CreateUserPost.dto';
 import { CreateUserProfileDto } from 'src/users/dtos/CreateUserProfile.dto';
@@ -21,7 +24,9 @@ export class UsersController {
   constructor(private userService: UsersService) {}
 
   @Get()
+  @UseInterceptors(UsersInterceptor)
   async getUsers() {
+    log('Inside getUsers handler by Interceptor');
     const users = await this.userService.findUsers();
     return users;
   }
