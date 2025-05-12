@@ -1,5 +1,7 @@
 <?php
-// Abstract class (Data Abstraction)
+
+1. // Abstract class (Data Abstraction)
+
 abstract class Vehicle {
     protected $brand; // Encapsulation (protected property)
 
@@ -11,7 +13,8 @@ abstract class Vehicle {
     abstract public function startEngine();
 }
 
-// Child class extending Vehicle (Inheritance)
+2. // Child class extending Vehicle (Inheritance)
+
 class Car extends Vehicle {
     private $model; // Encapsulation (private property)
 
@@ -26,7 +29,8 @@ class Car extends Vehicle {
     }
 }
 
-// Another child class
+3. // Another child class
+
 class Motorcycle extends Vehicle {
     public function startEngine() {
         return "Revving up the $this->brand motorcycle";
