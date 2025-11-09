@@ -1,0 +1,130 @@
+									## ======== apache2===========
+
+apache- plain OS - Ubuntu 22.4 64bit - setup VPS host name - password, SSH key
+manage vps - setting- IP address
+sudo systemctl start apache2
+sudo systemctl start mysql
+
+#  After buy and create vps server
+
+1. open powershell 
+	ssh root@ipaddress
+	password
+
+2. sudo apt update
+	sudo service apache2 status
+
+3. sudo apt install apache2
+	
+
+4. sudo apt install ufw
+	sudo ufw allow "Apache Full"
+	& browse ip address like 181.215.78.142 - if see default page then okay
+	
+5. sudo apt install php libapache2-mod-php php-mbstring php-gd php-xml php-cli php-zip php-json php-curl php-intl php-mysql
+
+6. test php setup
+	sudo nano /var/www/html/test.php
+	<?php phpinfo(;
+	clt o clt x
+	browse ip address 181.215.78.142/test.php
+
+7. mysql server setup
+	sudo apt install mysql-server
+	sudo mysql 
+	sudo mysql_secure_installation
+
+8. create database 
+	sudo mysql -p
+	CREATE DATABASE eschool CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+	exit
+
+9. Laravel setup
+	sudo apt install git 
+	cd /var/www/
+	git clone giturl projectname
+
+10. Composer set up
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'c8b085408188070d5f52bcfe4ecfbee5f727afa458b2573b8eaaf77b3419b0bf2768dc67c86944da1544f06fa544fd47') { echo 'Installer verified'.PHP_EOL; } else { echo 'Installer corrupt'.PHP_EOL; unlink('composer-setup.php'); exit(1); }"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+sudo mv composer.phar /usr/local/bin/composer
+
+composer
+
+11. cd projectname
+	composer install
+
+or composer install --no-dev --optimize-autoloader
+php artisan key:generate --ansi
+
+12. env setup - ls -la
+	cp .env.example .env
+	nano .env
+	clt o clt x
+
+13. if need migrate, seed etc.  then command 
+	php artisan migrate
+	php artisan db:seed --force
+
+14. change group, permission
+	sudo chgrp -R www-data /var/www/projectname
+	sudo chmod -R 775 /var/www/projectname/storage
+	sudo chmod -R 775 /var/www/projectname/bootstrap/cache
+
+15. set up virtual hosts 
+	cd /etc/apache2/sites-available/
+	sudo nano url(abc.com).conf
+
+<VirtualHost *:80>
+   ServerName laravelexample.net
+   ServerAdmin webmaster@thedomain.com
+   DocumentRoot /var/www/laravelexample/public
+
+   <Directory /var/www/laravelexample>
+       AllowOverride All
+   </Directory>
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+clt o clt x
+
+ls -la
+sudo a2dissite 000-default.conf
+sudo a2ensite url(abc.com).conf
+sudo a2enmod rewrite
+
+
+16. sudo service apache2 restart
+
+17. Get Domain & Configure DNS
+	go to domain panel and DNS/Nameservers 
+	create:  A @ points to- ipaddress TTL 
+	browse abc.com
+
+18. Update the project and pull
+	cd /var/www/projectname 
+	git pull origin main
+
+19. Install Node.js and Build assets
+
+	curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
+	sudo apt-get install -y nodejs
+
+	cd /var/www/projectname
+	npm install
+	npm run build
+
+20. Install SSL
+	
+	sudo apt install certbot python3-certbot-apache
+	sudo certbot --apache
+
+
+								## ======== nginx ===========
+
+https://chatgpt.com/share/6910d905-ad08-800a-988c-12b0fd9407cf
